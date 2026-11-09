@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -g -Wall -I. -Isrc/app/encryptDecrypt -Isrc/app/fileHandling -Isrc/app/processes
 
-MAIN_TARGET = encrypt_decrypt
-CRYPTION_TARGET = cryption
+MAIN_TARGET = encrypt_decrypt.exe
+CRYPTION_TARGET = cryption.exe
 
 MAIN_SRC = main.cpp \
            src/app/processes/ProcessManagement.cpp \
@@ -30,6 +30,6 @@ $(CRYPTION_TARGET): $(CRYPTION_OBJ)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(MAIN_OBJ) $(CRYPTION_OBJ) $(MAIN_TARGET) $(CRYPTION_TARGET)
+	del /f /q $(MAIN_OBJ) $(CRYPTION_OBJ) $(MAIN_TARGET) $(CRYPTION_TARGET) 2>nul || rm -f $(MAIN_OBJ) $(CRYPTION_OBJ) $(MAIN_TARGET) $(CRYPTION_TARGET)
 
-.PHONY: clean all	
+.PHONY: clean all

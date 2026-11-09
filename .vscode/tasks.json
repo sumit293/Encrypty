@@ -3,9 +3,24 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "build",
-            "command": "make",
-            "args": [],
+            "label": "C/C++: g++.exe build active file",
+            "command": "D:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "-Wall",
+                "-I.",
+                "-Isrc/app/encryptDecrypt",
+                "-Isrc/app/fileHandling",
+                "-Isrc/app/processes",
+                "main.cpp",
+                "src/app/processes/ProcessManagement.cpp",
+                "src/app/fileHandling/IO.cpp",
+                "src/app/fileHandling/ReadEnv.cpp",
+                "src/app/encryptDecrypt/Cryption.cpp",
+                "-o",
+                "${workspaceFolder}/encrypt_decrypt.exe"
+            ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -15,6 +30,71 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "D:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "-Wall",
+                "-I.",
+                "-Isrc/app/encryptDecrypt",
+                "-Isrc/app/fileHandling",
+                "-Isrc/app/processes",
+                "main.cpp",
+                "src/app/processes/ProcessManagement.cpp",
+                "src/app/fileHandling/IO.cpp",
+                "src/app/fileHandling/ReadEnv.cpp",
+                "src/app/encryptDecrypt/Cryption.cpp",
+                "-o",
+                "${workspaceFolder}/encrypt_decrypt.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "build cryption",
+            "command": "D:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "-Wall",
+                "-I.",
+                "-Isrc/app/encryptDecrypt",
+                "-Isrc/app/fileHandling",
+                "-Isrc/app/processes",
+                "src/app/encryptDecrypt/CryptionMain.cpp",
+                "src/app/encryptDecrypt/Cryption.cpp",
+                "src/app/fileHandling/IO.cpp",
+                "src/app/fileHandling/ReadEnv.cpp",
+                "-o",
+                "${workspaceFolder}/cryption.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+        {
+            "type": "shell",
+            "label": "Run encrypt_decrypt",
+            "command": ".\\encrypt_decrypt.exe",
+            "dependsOn": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
             }
         }
     ]

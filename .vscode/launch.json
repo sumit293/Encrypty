@@ -1,24 +1,40 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
         {
-            "name": "Debug encrypt_decrypt",
-            "type": "gdb",
+            "name": "Run & Debug encrypt_decrypt",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/encrypt_decrypt",
+            "program": "${workspaceFolder}/encrypt_decrypt.exe",
             "args": [],
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "build"
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "D:/msys64/ucrt64/bin/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: g++.exe build active file"
         },
         {
             "name": "Debug cryption (standalone)",
-            "type": "gdb",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/cryption",
-            "args": ["your_task_data_here"],
+            "program": "${workspaceFolder}/cryption.exe",
+            "args": ["test/test1.txt,ENCRYPT"],
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "build"
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "D:/msys64/ucrt64/bin/gdb.exe",
+            "preLaunchTask": "build cryption"
         }
     ]
 }

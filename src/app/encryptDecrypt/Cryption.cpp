@@ -1,37 +1,35 @@
-#include"Cryption.hpp"
-#include"../processes/Task.hpp"
-#include"../fileHandling/ReadEnv.cpp"
+#include "Cryption.hpp"
+#include "../fileHandling/ReadEnv.hpp"
+#include "../processes/Task.hpp"
+#include <iostream>
 
-int executeCryption (const std::string &taskData){
-    Task task  = Task::fromString (taskData);
-    ReadEnv env;
+int executeCryption(const std::string &taskData) {
+  Task task = Task::fromString(taskData);
+  ReadEnv env;
 
-    std::string envKey = env.getenv();
-    int key = std::stoi(envKey);
+  std::string envKey = env.getenv();
+  int key = ((std::stoi(envKey) % 256) + 256) % 256;
 
-    if (task.action == Action::ENCRYPT){
-        char ch;
-         while(task.f_stream.get(ch)){
-            ch = (ch + key) % 256; // simple encryption by shifting ASCII value
-            task.f_stream.seekp(-1, std::ios::cur); // move the put pointer back to overwrite the character
-            task.f_stream.put(ch);
-         }
-
-         task.f_stream.close();
-        
+  if (task.action == Action::ENCRYPT) {
+    char ch;
+    while (task.f_stream.get(ch)) {
+      unsigned char uch = static_cast<unsigned char>(ch);
+      uch = (uch + key) % 256;
+      task.f_stream.seekp(-1, std::ios::cur);
+      task.f_stream.put(static_cast<char>(uch));
+      task.f_stream.flush();
     }
-
-    else {
-        char ch ;
-          while(task.f_stream.get(ch)){
-            ch  = (ch-key+256) % 256; // simple decryption by shifting ASCII value back
-            task.f_stream.seekp(-1, std::ios::cur); // move the put pointer back to overwrite the character
-            task.f_stream.put(ch);  
-          }
-
-          task.f_stream.close();
-
+    task.f_stream.close();
+  } else {
+    char ch;
+    while (task.f_stream.get(ch)) {
+      unsigned char uch = static_cast<unsigned char>(ch);
+      uch = (uch - key + 256) % 256;
+      task.f_stream.seekp(-1, std::ios::cur);
+      task.f_stream.put(static_cast<char>(uch));
+      task.f_stream.flush();
     }
-    return 0;
-    
+    task.f_stream.close();
+  }
+  return 0;
 }
