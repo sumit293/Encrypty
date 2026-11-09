@@ -1,7 +1,7 @@
 #include <iostream>
 #include <filesystem>
-#include  "./src/app/process/ProcessManagement.hpp"
-#include"./src/app/process/Task.hpp"
+#include  "./src/app/processes/ProcessManagement.hpp"
+#include"./src/app/processes/Task.hpp"
 namespace fs = std::filesystem;
 int main(int argc, char *argv[]){
 std::string directory;
